@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 决策树 -->
+  <view class="uploader activity">
+    <view class="uploader-text" bindtap="buildTree">
+      <text>决策树</text>
+    </view>
+  </view>
+  <!-- 决策树 -->
+  <view class="uploader activity">
+    <view class="uploader-text" bindtap="predictTrees">
+      <text>预测</text>
+    </view>
+    <block wx:for="{{prediction}}" wx:key="{{index}}">
+      <text>_tree {{index}}: {{item}}</text>
+    </block>
+  </view>
+  <!-- 处理数据 -->
+  <view class="uploader activity">
+    <view class="uploader-text" bindtap="extractFeature">
+      <text>处理数据</text>
+    </view>
+  </view>
+  <!-- 选择活动类别 -->
+  <view class="uploader activity">
+    <view class="uploader-text" bindtap="showAction">
+      <text>请选择一个活动</text>
+      <text wx:if="{{activity}}">{{activity}}</text>
+    </view>
+  </view>
+
+  <view class="uploader activity">
+    <view class="uploader-text">
+      <text>活动时间</text>
+      <text wx:if="{{time}}">{{time}}s</text>
+    </view>
+  </view>
+
+  <!-- 加速度计 -->
+  <view class="uploader activity">
+    <view class="uploader-text" wx:if="{{waitting}}" bindtap="startAccelerometer">
+      <text>开始读取</text>
+      <text>{{timeLeft}}</text>
+    </view>
+    <view class="uploader-text" wx:else bindtap="stopAccelerometer">
+      <text>停止读取</text>
+    </view>
+  </view>
+  <view wx:if="{{accelerometerX && !waitting}}">
+    x: {{accelerometerX}}, y: {{accelerometerY}}, z: {{accelerometerZ}}
+  </view>
+</view>
